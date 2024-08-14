@@ -1,5 +1,9 @@
 <?php 
-  $no_wa = 6283136382607;
+require 'koneksi.php';
+
+$result = mysqli_query($koneksi, "SELECT * FROM menu");
+
+$no_wa = 6283136382607;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,6 +12,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pisang Piscok</title>
+
+    <!-- Favicons -->
+  <link href="assets/frontend/images/piscok.ico" rel="icon">
+  <!-- <link href="../assets/frontend/img/apple-touch-icon.png" rel="apple-touch-icon"> -->
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -29,77 +37,7 @@
 
   <body>
     <!-- Navbar start -->
-    <nav class="navbar" x-data>
-      <a href="#" class="navbar-logo">piscok<span>gurih</span>.</a>
-
-      <div class="navbar-nav">
-        <a href="#home">Home</a>
-        <a href="#about">Tentang Kami</a>
-        <a href="#menu">Menu</a>
-        <a href="#products">Produk</a>
-        <a href="#galery">Galery</a>
-        <a href="#contact">Kontak</a>
-      </div>
-
-      <div class="navbar-extra">
-        <a href="#" id="search-button"><i data-feather="search"></i></a>
-        <a href="#" id="shopping-cart-button">
-          <i data-feather="shopping-cart">
-            <span class="quantity-badge" x-show="$store.cart.quantity" x-text="$store.cart.quantity"></span>
-          </i></a>
-        <a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
-      </div>
-
-      <!-- Search Form start -->
-      <div class="search-form">
-        <input type="search" id="search-box" placeholder="search here..." />
-        <label for="search-box"><i data-feather="search"></i></label>
-      </div>
-      <!-- Search Form end -->
-
-      <!-- Shopping Cart start -->
-      <div class="shopping-cart">
-        <template x-for="(item, index) in $store.cart.items" x-keys="index">
-        <div class="cart-item">
-          <img :src="`img/products/${item.img}`" :alt="item.name" />
-          <div class="item-detail">
-            <h3 x-text="item.name"></h3>
-            <div class="item-price">
-              <span x-text="rupiah(item.price)"></span> &times;
-              <button id="remove" @click="$store.cart.remove(item.id)">&minus;</button>
-              <span x-text="item.quantity"></span>
-              <button id="add" @click="$store.cart.add(item)">&plus;</button> &equals;
-              <span x-text="rupiah(item.total)"></span>
-            </div>
-          </div>
-        </div>
-        </template>
-        <h4 x-show="!$store.cart.items.length" style="margin-top: 1rem;">Cart is Empty</h4>
-        <h4 x-show="$store.cart.items.length">Total : <span x-text="rupiah($store.cart.total)"></span></h4>
-
-        <div class="form-container" x-show="$store.cart.items.length">
-          <form action="" id="checkoutForm">
-            <h5>Costomer Detail</h5>
-
-            <label for="name">
-              <span>Name</span>
-              <input type="text" name="name" id="name">
-            </label>
-            <label for="email">
-              <span>Email</span>
-              <input type="text" email="email" id="email">
-            </label>
-            <label for="phone">
-              <span>Phone</span>
-              <input type="text" phone="phone" id="phone" autocomplete="off">
-            </label>
-
-            <button class="checkout-button" type="submit" id="checkout-button" value="Checkout">Checkout</button>
-          </form>
-        </div>
-      </div>
-      <!-- Shopping Cart end -->
-    </nav>
+    <?php include 'navbar.php'; ?>
     <!-- Navbar end -->
 
     <!-- Hero Section start -->
@@ -141,36 +79,13 @@
       <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Expedita, repellendus numquam quam tempora voluptatum.</p>
 
       <div class="row">
+        <?php while($row = mysqli_fetch_assoc($result)) : ?>
         <div class="menu-card">
-          <img src="img/menu/menu.png" alt="Espresso" class="menu-card-img" />
-          <h3 class="menu-card-title">- Pisang Coklat -</h3>
-          <p class="menu-card-price">IDR 15K</p>
+          <img src="img/menu/<?= $row["gambar_produk"]; ?>" alt="Espresso" class="menu-card-img" />
+          <h3 class="menu-card-title">- <?= $row["nama_produk"]; ?> -</h3>
+          <p class="menu-card-price">IDR <?= $row["harga_produk"]; ?></p>
         </div>
-        <div class="menu-card">
-          <img src="img/menu/1.png" alt="Espresso" class="menu-card-img" />
-          <h3 class="menu-card-title">- Pisang Coklat Lumer -</h3>
-          <p class="menu-card-price">IDR 25K</p>
-        </div>
-        <div class="menu-card">
-          <img src="img/menu/2.png" alt="Espresso" class="menu-card-img" />
-          <h3 class="menu-card-title">- Coklat Keju -</h3>
-          <p class="menu-card-price">IDR 20K</p>
-        </div>
-        <div class="menu-card">
-          <img src="img/menu/3.png" alt="Espresso" class="menu-card-img" />
-          <h3 class="menu-card-title">- Coklat Caramel -</h3>
-          <p class="menu-card-price">IDR 15K</p>
-        </div>
-        <div class="menu-card">
-          <img src="img/menu/4.png" alt="Espresso" class="menu-card-img" />
-          <h3 class="menu-card-title">- Coklat Gula Aren -</h3>
-          <p class="menu-card-price">IDR 15K</p>
-        </div>
-        <div class="menu-card">
-          <img src="img/menu/5.png" alt="Espresso" class="menu-card-img" />
-          <h3 class="menu-card-title">- Coklat Nutella -</h3>
-          <p class="menu-card-price">IDR 15K</p>
-        </div>
+        <?php endwhile; ?>
       </div>
     </section>
     <!-- Menu Section end -->
