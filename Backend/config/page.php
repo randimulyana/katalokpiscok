@@ -19,57 +19,46 @@ switch ($page) {
  include 'pages/beranda.php';
 }
 
-//----------------------------------// MAHASISWA
-if(isset($_GET['page'])){
- $page = $_GET['page'];
-switch ($page) {
-// Beranda
- case 'data_mahasiswa':
-   include 'pages/mahasiswa/data_mahasiswa.php';
- break;
- case 'tambah_mahasiswa':
-   include 'pages/mahasiswa/tambah_mahasiswa.php';
- break;
- case 'ubah_mahasiswa';
-   include 'pages/mahasiswa/ubah_mahasiswa.php';
- break;
- }
-} 
 
- //----------------------------------// Menu
+//----------------------------------//  Menu  \\----------------------------------\\
+
 if(isset($_GET['page'])){
- $page = $_GET['page'];
+  $page = $_GET['page'];
+  switch ($page) {
+    // Beranda
+    case 'data_produk':
+      include 'pages/produk/data_produk.php';
+      break;
+      case 'tambah_produk':
+        include 'pages/produk/tambah_produk.php';
+        break;
+        case 'ubah_produk';
+        include 'pages/produk/ubah_produk.php';
+        break;
+      }
+    }
+
+
+
+//----------------------------------//  Artikel  \\----------------------------------\\
+
+if(isset($_GET['page'])){
+$page = $_GET['page'];
 switch ($page) {
 // Beranda
- case 'data_produk':
-   include 'pages/produk/data_produk.php';
- break;
- case 'tambah_produk':
-   include 'pages/produk/tambah_produk.php';
- break;
- case 'ubah_produk';
-   include 'pages/produk/ubah_produk.php';
- break;
- }
+case 'data_artikel':
+  include 'pages/artikel/data_artikel.php';
+  break;
+  case 'tambah_artikel':
+    include 'pages/artikel/tambah_artikel.php';
+    break;
+    case 'ubah_artikel';
+    include 'pages/artikel/ubah_artikel.php';
+    break;
+  }
 }
 
-//  ---------------------------------------Motivasi
-if(isset($_GET['page'])){
- $page = $_GET['page'];
-switch ($page) {
-// Beranda
- case 'data_motivasi':
-   include 'pages/motivasi/data_motivasi.php';
-   break;
- case 'tambah_motivasi':
-   include 'pages/motivasi/tambah_motivasi.php';
-   break;
- case 'ubah_motivasi';
-   include 'pages/motivasi/ubah_motivasi.php';
-   break;
- }
-}
- //----------------------------------// Galery
+
 if(isset($_GET['page'])){
  $page = $_GET['page'];
 switch ($page) {

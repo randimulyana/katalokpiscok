@@ -2,19 +2,17 @@
 			include "../../config/koneksi.php";
 
 
-			$id_mahasiswa = $_POST['id'];
-			$nim          = $_POST['nim'];    
+			$id_produk = $_POST['id'];
 			$nama         = $_POST['nama'];
-			$alamat       = $_POST['alamat'];
-			$jurusan      = $_POST['jurusan'];
+			$harga       = $_POST['harga'];
 
-			$query = mysqli_query($koneksi, "SELECT * fROM tb_mahasiswa WHERE id_mahasiswa='$id_mahasiswa'");
+			$query = mysqli_query($koneksi, "SELECT * fROM menu WHERE id_produk='$id_produk'");
 	        $d = mysqli_fetch_array($query);
-	        $foto_lama = $d['foto'];
+	        $foto_lama = $d['gambar_produk'];
 
 			if($_FILES['foto']['name'] != null){
-			
-			$direktori      = "img/";
+				
+			$direktori      = "images/";
 			$file_name      = $_FILES['foto']['name'];
 			move_uploaded_file($_FILES['foto']['tmp_name'],$direktori.$file_name);
 
@@ -24,10 +22,10 @@
 
 			
 
-			$result = mysqli_query($koneksi, "UPDATE tb_mahasiswa SET nim='$nim', nama='$nama', foto='$file_name', alamat='$alamat', jurusan='$jurusan', foto='$file_name'  WHERE id_mahasiswa='$id_mahasiswa'");
+			$result = mysqli_query($koneksi, "UPDATE menu SET nama_produk='$nama', harga_produk='$harga', gambar_produk='$file_name'  WHERE id_produk='$id_produk'");
 
 			if ($result) {
-			header("Location:../../index.php?page=data_mahasiswa");
+			header("Location:../../index.php?page=data_produk");
 			}else {
 				echo 'gagal';
 			}

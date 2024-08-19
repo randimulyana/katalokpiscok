@@ -4,7 +4,7 @@
 	<section class="content-header">
 	<h1>
 	Beranda
-	<small> / Halaman Admin</small>
+	<small> / Dashboard Administrator</small>
 	</h1>
 	<nav aria-label="breadcrumb">
   <ol class="breadcrumb">

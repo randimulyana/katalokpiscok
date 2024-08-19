@@ -6,7 +6,7 @@
 $id = $_GET['id'];
  include "config/koneksi.php";
 // Fetech user data based on id
-$result = mysqli_query($koneksi, "SELECT * FROM menu WHERE id_produk='$id'");
+$result = mysqli_query($koneksi, "SELECT * FROM artikel WHERE id_artikel='$id'");
  $d = mysqli_fetch_array($result);
 
 ?>
@@ -17,13 +17,13 @@ $result = mysqli_query($koneksi, "SELECT * FROM menu WHERE id_produk='$id'");
       <!-- Content Header (Page header) -->
       <section class="content-header">
         <h1>
-        Edit Produk
+        Edit Artikel
         </h1>
         <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-    <li class="breadcrumb-item"><a href="mahasiswa">Produk</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Edit Produk</li>
+    <li class="breadcrumb-item"><a href="mahasiswa">Artikel</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Edit Artikel</li>
   </ol>
 </nav>
       </section>
@@ -37,23 +37,23 @@ $result = mysqli_query($koneksi, "SELECT * FROM menu WHERE id_produk='$id'");
             <div class="box box-primary">
               <!-- /.box-header -->
               <!-- form start -->
-              <form role="form" method="post" action="pages/produk/ubah_produk_proses.php" enctype="multipart/form-data">
+              <form role="form" method="post" action="pages/artikel/ubah_artikel_proses.php" enctype="multipart/form-data">
                 <div class="box-body">
-                  <input type="hidden" name="id" value="<?php echo $d['id_produk']; ?>">
+                  <input type="hidden" name="id" value="<?php echo $d['id_artikel']; ?>">
                   <div class="form-group">
-                    <label>Nama</label>
-                    <input type="text" name="nama" class="form-control" placeholder="Nama" value="<?php echo $d['nama_produk']; ?>">
+                    <label>Judul</label>
+                    <input type="text" name="judul" class="form-control" placeholder="judul" value="<?php echo $d['judul']; ?>">
                   </div>
                   <div class="form-group">
                     <label>foto</label>
                     <br>
-                    <img src="pages/produk/images/<?= $d['gambar_produk'] ?>" alt="tes" style="width: 10em;">
+                    <img src="pages/artikel/images/<?= $d['gambar'] ?>" alt="tes" style="width: 10em;">
                     <br>
-                    <input type="file" name="foto" value="<?php echo $d['gambar_produk']; ?>">
+                    <input type="file" name="foto" value="<?php echo $d['gambar']; ?>">
                   </div>
                   <div class="form-group">
-                    <label>Harga</label>
-                    <input type="text" name="harga" class="form-control" placeholder="alamat" value="<?php echo $d['harga_produk']; ?>">
+                    <label>Deskripsi</label>
+                    <input type="text" name="deskripsi" class="form-control" placeholder="deskripsi" value="<?php echo $d['deskripsi']; ?>">
                   </div>
                   
                 </div>

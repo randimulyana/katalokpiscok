@@ -20,7 +20,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Produk Piscok | Admin</title>
+    <title>Produk Piscok | Administrator</title>
 
     <!-- Favicons -->
   <link href="../assets/frontend/images/piscok.ico" rel="icon">
@@ -52,7 +52,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="far fa-kiss-wink-heart"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Admin<sup>r</sup></div>
+                <div class="sidebar-brand-text mx-3">Piscok<sup>😋</sup></div>
             </a>
 
             <!-- Divider -->
@@ -100,7 +100,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Costum:</h6>
-                        <a class="collapse-item" href="sejarah">Sejarah</a>
+                        <a class="collapse-item" href="index.php?page=data_artikel">Artikel</a>
                         <a class="collapse-item" href="motivasi">Motivasi</a>
                         <a class="collapse-item" href="visi&misi">Visi & Misi</a>
                         <a class="collapse-item" href="tujuan">Tujuan</a>
@@ -284,7 +284,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                        <span>Copyright &copy; randz_codex 2024</span>
                     </div>
                 </div>
             </footer>
@@ -320,6 +320,10 @@
             </div>
         </div>
     </div>
+
+    <!-- SweetAlert CDN -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="../assets/backend/vendor/jquery/jquery.min.js"></script>
