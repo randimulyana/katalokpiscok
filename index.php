@@ -1,7 +1,8 @@
 <?php 
 require 'backend/config/koneksi.php';
 
-$result = mysqli_query($koneksi, "SELECT * FROM menu");
+$menu = mysqli_query($koneksi, "SELECT * FROM menu");
+$galery = mysqli_query($koneksi, "SELECT * FROM galery");
 
 $no_wa = 6283136382607;
 ?>
@@ -14,7 +15,7 @@ $no_wa = 6283136382607;
     <title>Pisang Piscok</title>
 
     <!-- Favicons -->
-  <link href="assets/frontend/images/piscok.ico" rel="icon">
+  <link href="assets/frontend/img/piscok.ico" rel="icon">
   <!-- <link href="../assets/frontend/img/apple-touch-icon.png" rel="apple-touch-icon"> -->
 
     <!-- Fonts -->
@@ -26,19 +27,91 @@ $no_wa = 6283136382607;
     <script src="https://unpkg.com/feather-icons"></script>
 
     <!-- My Style -->
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="assets/frontend/css/style.css" />
 
     <!-- AlpineJS -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <!-- AppJS -->
-     <script src="src/app.js"></script>
+     <script src="assets/frontend/src/app.js"></script>
   </head>
 
   <body>
     <!-- Navbar start -->
-    <?php include 'navbar.php'; ?>
-    <!-- Navbar end -->
+<nav class="navbar" x-data>
+  <a href="#" class="navbar-logo">piscok<span>gurih</span>.</a>
+
+  <div class="navbar-nav">
+    <a href="index.php">Home</a>
+    <a href="#about">Tentang Kami</a>
+    <a href="#menu">Menu</a>
+    <a href="#products">Produk</a>
+    <a href="#galery">Galery</a>
+    <a href="profil.php">Profil Pengusaha</a>
+    <a href="#contact">Kontak</a>
+  </div>
+
+  <div class="navbar-extra">
+    <a href="#" id="search-button"><i data-feather="search"></i></a>
+    <a href="#" id="shopping-cart-button">
+      <i data-feather="shopping-cart">
+        <span class="quantity-badge" x-show="$store.cart.quantity" x-text="$store.cart.quantity"></span> </i
+    ></a>
+    <a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
+  </div>
+
+  <!-- Search Form start -->
+  <div class="search-form">
+    <input type="search" id="search-box" placeholder="search here..." />
+    <label for="search-box"><i data-feather="search"></i></label>
+  </div>
+  <!-- Search Form end -->
+
+  <!-- Shopping Cart start -->
+  <div class="shopping-cart">
+    <template x-for="(item, index) in $store.cart.items" x-keys="index">
+      <div class="cart-item">
+        <img :src="`img/products/${item.img}`" :alt="item.name" />
+        <div class="item-detail">
+          <h3 x-text="item.name"></h3>
+          <div class="item-price">
+            <span x-text="rupiah(item.price)"></span> &times;
+            <button id="remove" @click="$store.cart.remove(item.id)">&minus;</button>
+            <span x-text="item.quantity"></span>
+            <button id="add" @click="$store.cart.add(item)">&plus;</button> &equals;
+            <span x-text="rupiah(item.total)"></span>
+          </div>
+        </div>
+      </div>
+    </template>
+    <h4 x-show="!$store.cart.items.length" style="margin-top: 1rem">Cart is Empty</h4>
+    <h4 x-show="$store.cart.items.length">Total : <span x-text="rupiah($store.cart.total)"></span></h4>
+
+    <div class="form-container" x-show="$store.cart.items.length">
+      <form action="" id="checkoutForm">
+        <h5>Costomer Detail</h5>
+
+        <label for="name">
+          <span>Name</span>
+          <input type="text" name="name" id="name" />
+        </label>
+        <label for="email">
+          <span>Email</span>
+          <input type="text" email="email" id="email" />
+        </label>
+        <label for="phone">
+          <span>Phone</span>
+          <input type="text" phone="phone" id="phone" autocomplete="off" />
+        </label>
+
+        <button class="checkout-button" type="submit" id="checkout-button" value="Checkout">Checkout</button>
+      </form>
+    </div>
+  </div>
+  <!-- Shopping Cart end -->
+</nav>
+<!-- Navbar end -->
+
 
     <!-- Hero Section start -->
     <section class="hero" id="home">
@@ -79,9 +152,9 @@ $no_wa = 6283136382607;
       <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Expedita, repellendus numquam quam tempora voluptatum.</p>
 
       <div class="row">
-        <?php while($row = mysqli_fetch_assoc($result)) : ?>
+        <?php while($row = mysqli_fetch_assoc($menu)) : ?>
         <div class="menu-card">
-          <img src="img/menu/<?= $row["gambar_produk"]; ?>" alt="Espresso" class="menu-card-img" />
+          <img src="backend/pages/produk/images/<?= $row["gambar_produk"]; ?>" alt="Espresso" class="menu-card-img" />
           <h3 class="menu-card-title">- <?= $row["nama_produk"]; ?> -</h3>
           <p class="menu-card-price">IDR <?= $row["harga_produk"]; ?></p>
         </div>
@@ -109,7 +182,7 @@ $no_wa = 6283136382607;
                   stroke-linecap="round"
                   stroke-linejoin="round"
                 >
-                  <use href="img/feather-sprite.svg#shopping-cart" />
+                  <use href="assets/frontend/img/feather-sprite.svg#shopping-cart" />
                 </svg>
               </a>
               <a href="#" class="item-detail-button">
@@ -122,12 +195,12 @@ $no_wa = 6283136382607;
                   stroke-linecap="round"
                   stroke-linejoin="round"
                 >
-                  <use href="img/feather-sprite.svg#eye" />
+                  <use href="assets/frontend/img/feather-sprite.svg#eye" />
                 </svg>
               </a>
             </div>
             <div class="product-image">
-              <img :src="`img/products/${item.img}`" :alt="item.name" />
+              <img :src="`assets/frontend/img/products/${item.img}`" :alt="item.name" />
             </div>
             <div class="product-content">
               <h3 x-text="item.name"></h3>
@@ -141,7 +214,7 @@ $no_wa = 6283136382607;
                   stroke-linecap="round"
                   stroke-linejoin="round"
                 >
-                  <use href="img/feather-sprite.svg#star" />
+                  <use href="assets/frontend/img/feather-sprite.svg#star" />
                 </svg>
               <svg
                   width="24"
@@ -152,7 +225,7 @@ $no_wa = 6283136382607;
                   stroke-linecap="round"
                   stroke-linejoin="round"
                 >
-                  <use href="img/feather-sprite.svg#star" />
+                  <use href="assets/frontend/img/feather-sprite.svg#star" />
                 </svg>
               <svg
                   width="24"
@@ -163,7 +236,7 @@ $no_wa = 6283136382607;
                   stroke-linecap="round"
                   stroke-linejoin="round"
                 >
-                  <use href="img/feather-sprite.svg#star" />
+                  <use href="assets/frontend/img/feather-sprite.svg#star" />
                 </svg>
               <svg
                   width="24"
@@ -174,7 +247,7 @@ $no_wa = 6283136382607;
                   stroke-linecap="round"
                   stroke-linejoin="round"
                 >
-                  <use href="img/feather-sprite.svg#star" />
+                  <use href="assets/frontend/img/feather-sprite.svg#star" />
                 </svg>
               <svg
                   width="24"
@@ -185,7 +258,7 @@ $no_wa = 6283136382607;
                   stroke-linecap="round"
                   stroke-linejoin="round"
                 >
-                  <use href="img/feather-sprite.svg#star" />
+                  <use href="assets/frontend/img/feather-sprite.svg#star" />
                 </svg>
               </div>
               <div class="product-price"><span x-text="rupiah(item.price)"></span></div>
@@ -205,41 +278,13 @@ $no_wa = 6283136382607;
             <p>Foto Berbagai dari semua produk dengan beberapa angel.</p>
           </div>
           <div class="row">
+            <?php while($row = mysqli_fetch_assoc($galery)) : ?>
             <div class="col-md-3">
               <a href="#">
-                <img src="img/galery/1.png" alt="gambar Produk 1" width="300" height="300" class="img-fluid gallery-img" />
+                <img src="backend/pages/galery/images/<?= $row["foto"]; ?>" alt="gambar Produk 1" width="300" height="300" class="img-fluid gallery-img" />
               </a>
             </div>
-            <div class="col-md-3">
-              <a href="#">
-                <img src="img/galery/2.jpg" alt="gambar Produk 2" width="300" height="300" class="img-fluid gallery-img" />
-              </a>
-            </div>
-            <div class="col-md-3">
-              <a href="#">
-                <img src="img/galery/3.jpg" alt="gambar Produk 3" width="300" height="300" class="img-fluid gallery-img" />
-              </a>
-            </div>
-            <div class="col-md-3">
-              <a href="#">
-                <img src="img/galery/4.jpg" alt="gambar Produk 4" width="300" height="300" class="img-fluid gallery-img" />
-              </a>
-            </div>
-            <div class="col-md-3">
-              <a href="#">
-                <img src="img/galery/5.jpg" alt="gambar Produk 5" width="300" height="300" class="img-fluid gallery-img" />
-              </a>
-            </div>
-            <div class="col-md-3">
-              <a href="#">
-                <img src="img/galery/6.jpeg" alt="gambar Produk 6" width="300" height="300" class="img-fluid gallery-img" />
-              </a>
-            </div>
-            <div class="col-md-3">
-              <a href="#">
-                <img src="img/galery/1.png" alt="gambar Produk 7" width="300" height="300" class="img-fluid gallery-img" />
-              </a>
-            </div>
+            <?php endwhile; ?>
           </div>
         </div>
       </div>
@@ -329,6 +374,6 @@ $no_wa = 6283136382607;
     </script>
 
     <!-- My Javascript -->
-    <script src="js/script.js"></script>
+    <script src="assets/frontend/js/script.js"></script>
   </body>
 </html>

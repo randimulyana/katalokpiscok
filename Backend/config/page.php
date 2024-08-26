@@ -75,22 +75,7 @@ switch ($page) {
  }
 }
  
-// -----------------------------------------berita
-if(isset($_GET['page'])){
- $page = $_GET['page'];
-switch ($page) {
-// Beranda
- case 'data_berita':
-   include 'pages/berita/data_berita.php';
-   break;
- case 'tambah_berita':
-   include 'pages/berita/tambah_berita.php';
-   break;
- case 'ubah_berita';
-   include 'pages/berita/ubah_berita.php';
-   break;
- }
-}
+
 
 //  -------------------------------------------pengumuman
 if(isset($_GET['page'])){

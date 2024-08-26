@@ -127,7 +127,7 @@ if(empty($_SESSION['username'])) {
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Lainnya:</h6>
-                        <a class="collapse-item" href="galery">Galery</a>
+                        <a class="collapse-item" href="index.php?page=data_galery">Galery</a>
                         
                         <!-- <a class="collapse-item" href="index.php?page=data_lupa_password">Lupa Password</a> -->
                         <div class="collapse-divider"></div>
