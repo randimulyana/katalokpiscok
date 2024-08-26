@@ -1,10 +1,10 @@
 <?php 
 
-// session_start();
+session_start();
 
-// if(empty($_SESSION['username'])) {
-//     header("location:login.php");
-// }
+if(empty($_SESSION['username'])) {
+    header("location:login.php");
+}
 
 ?>
 
@@ -101,7 +101,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Costum:</h6>
                         <a class="collapse-item" href="index.php?page=data_artikel">Artikel</a>
-                        <a class="collapse-item" href="motivasi">Motivasi</a>
+                        <a class="collapse-item" href="index.php?page=data_galery">Galery</a>
                         <a class="collapse-item" href="visi&misi">Visi & Misi</a>
                         <a class="collapse-item" href="tujuan">Tujuan</a>
                         <a class="collapse-item" href="pengumuman">Pengumuman</a>

@@ -1,5 +1,5 @@
 <?php 
-require 'koneksi.php';
+require 'backend/config/koneksi.php';
 
 $result = mysqli_query($koneksi, "SELECT * FROM menu");
 
